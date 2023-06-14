@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-const INITIAL_GAME_STATE = ["X","O","",
-                            "","","",
-                            "","",""]
+const INITIAL_GAME_STATE = ["X","O","X",
+                            "O","X","O",
+                            "O","","X"]
 function Game() {
   const [gameState, setGameState] = useState<string[]>(INITIAL_GAME_STATE)
 
