@@ -1,10 +1,15 @@
 import { useState } from "react"
+import Square from "./Square"
 
-const INITIAL_GAME_STATE = ["X","O","X",
-                            "O","X","O",
-                            "O","","X"]
+const INITIAL_GAME_STATE = ["","","",
+                            "","","",
+                            "","",""]
 function Game() {
   const [gameState, setGameState] = useState<string[]>(INITIAL_GAME_STATE)
+
+  const handleCellClick = (event: any) => {
+    console.log("Cell Clicked!", event.target.getAttribute("data-cell-index"));
+};
 
   return (
       <div className="h-full p-8 text-slate-800 bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -15,9 +20,11 @@ function Game() {
           <div className="grid grid-cols-3 gap-3 mx-auto w-96">
             {
               gameState.map((player, index) =>
-                <div key={index} className="h-32 border-solid border-4 border-slate-200 font-display text-5xl text-center flex justify-center items-center cursor-pointer">
-                  {player}
-                </div>
+                <Square 
+                  key={index} 
+                  onClick={handleCellClick}
+                    {...{index, player}}
+                  />
               )
             }
           </div>
