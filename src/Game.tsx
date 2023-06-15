@@ -32,8 +32,22 @@ function Game() {
 
    // Runs whenever the gameState variable changes
    useEffect(() => {
+      if (gameState === INITIAL_GAME_STATE)
+      {
+         return;
+      }
+      
       checkForWinner();
    }, [gameState])
+
+   useEffect(() => {
+      const storedScores = localStorage.getItem("scores")
+
+      if (storedScores)
+      {
+         setScores(JSON.parse(storedScores));
+      }
+   }, [])
 
    // reset board back to initial condition
    const resetBoard = () => setGameState(INITIAL_GAME_STATE)
@@ -52,6 +66,9 @@ function Game() {
       newScores[currentPlayer] = newPlayerScore
 
       setScores(newScores);
+
+      // store score locally
+      localStorage.setItem("scores", JSON.stringify(newScores));
 
       resetBoard();
    }
