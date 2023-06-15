@@ -124,10 +124,10 @@ function Game() {
                )
                }
             </div>
-            <div>
-               <p>Next Player: <span>{currentPlayer}</span></p>
-               <p>Player X Wins: <span>{scores["X"]}</span></p>
-               <p>Player O Wins: <span>{scores["O"]}</span></p>
+            <div className="mx-auto w-96 text-2xl text-serif">
+               <p className="text-white mt-5">Next Player: <span className="font-display">{currentPlayer}</span></p>
+               <p className="text-white mt-5">Player X Wins: <span>{scores["X"]}</span></p>
+               <p className="text-white mt-5">Player O Wins: <span>{scores["O"]}</span></p>
             </div>
          </div>
       </div>
