@@ -18,8 +18,12 @@ const WINNING_COMBOS = [
    [2, 4, 6],
 ]
 
-const INITIAL_SCORES = {X:0, O:0}
+const INITIAL_SCORES: Scores = {X:0, O:0}
 const INITIAL_PLAYER = "X"
+
+type Scores = {
+   [key: string] : number
+}
 
 function Game() {
    const [gameState, setGameState] = useState<string[]>(INITIAL_GAME_STATE)
@@ -30,16 +34,27 @@ function Game() {
       checkForWinner();
    }, [gameState])
 
+   const resetBoard = () => setGameState(INITIAL_GAME_STATE)
+
    const changePlayer = () => {
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
    }
 
    const handleWin = () => {
-      window.alert(`Congrats Player ${currentPlayer}! You are the winner!!`)
+      window.alert(`Congrats Player ${currentPlayer}! You are the winner!!`);
+
+      const newPlayerScore = scores[currentPlayer] + 1
+      const newScores = {...scores}
+      newScores[currentPlayer] = newPlayerScore
+
+      setScores(newScores);
+
+      resetBoard();
    }
    
    const handleDraw = () => {
-      window.alert(`The game ended in a draw. You're both losers!`)
+      window.alert(`The game ended in a draw. You're both losers!`);
+      resetBoard();
    }
 
    const checkForWinner = () => {
@@ -110,7 +125,9 @@ function Game() {
                }
             </div>
             <div>
-               Score Goes Here...
+               <p>Next Player: <span>{currentPlayer}</span></p>
+               <p>Player X Wins: <span>{scores["X"]}</span></p>
+               <p>Player O Wins: <span>{scores["O"]}</span></p>
             </div>
          </div>
       </div>
