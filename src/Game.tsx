@@ -36,7 +36,7 @@ function Game() {
       {
          return;
       }
-      
+
       checkForWinner();
    }, [gameState])
 
@@ -55,6 +55,11 @@ function Game() {
    // Switch Player
    const changePlayer = () => {
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+   }
+
+   const resetScores = () => {
+      setScores(INITIAL_SCORES);
+      localStorage.setItem("scores", JSON.stringify(INITIAL_SCORES))
    }
 
    // What happens when someone wins a round
@@ -158,10 +163,17 @@ function Game() {
                   )
                }
             </div>
-            <div className="mx-auto w-96 text-2xl text-serif">
+            <div className="mx-auto mt-5 w-96 text-2xl text-serif">
                <p className="text-white mt-5">Next Player: <span className="font-display">{currentPlayer}</span></p>
                <p className="text-white mt-5">Player X Wins: <span>{scores["X"]}</span></p>
                <p className="text-white mt-5">Player O Wins: <span>{scores["O"]}</span></p>
+               <div class="container min-w-full flex flex-col items-center">
+                  <button 
+                        onClick={resetScores}
+                        class="bg-blue-600 text-white hover:bg-blue-800 font-bold py-2 px-5 mt-5 rounded-full">
+                     Reset Score
+                  </button>
+               </div>
             </div>
          </div>
       </div>
