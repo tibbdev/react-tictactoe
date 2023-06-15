@@ -167,10 +167,10 @@ function Game() {
                <p className="text-white mt-5">Next Player: <span className="font-display">{currentPlayer}</span></p>
                <p className="text-white mt-5">Player X Wins: <span>{scores["X"]}</span></p>
                <p className="text-white mt-5">Player O Wins: <span>{scores["O"]}</span></p>
-               <div class="container min-w-full flex flex-col items-center">
+               <div className="container min-w-full flex flex-col items-center">
                   <button 
                         onClick={resetScores}
-                        class="bg-blue-600 text-white hover:bg-blue-800 font-bold py-2 px-5 mt-5 rounded-full">
+                        className="bg-blue-600 text-white hover:bg-blue-800 font-bold py-2 px-5 mt-5 rounded-full">
                      Reset Score
                   </button>
                </div>
