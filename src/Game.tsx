@@ -21,6 +21,7 @@ const WINNING_COMBOS = [
 function Game() {
    const [gameState, setGameState] = useState<string[]>(INITIAL_GAME_STATE)
    const [currentPlayer, setCurrentPlayer] = useState<string>("X")
+   const [playerScores, setplayerScore] = useState<Number[]>([0,0])
 
    useEffect(() => {
       changePlayer();
@@ -28,7 +29,16 @@ function Game() {
 
    const changePlayer = () => {
       checkForWinner()
-   }  
+   }
+
+   const handleWin = () => {
+      window.alert(`Congrats Player ${currentPlayer}! You are the winner!!`)
+   }
+   
+   const handleDraw = () => {
+      window.alert(`The game ended in a draw. You're both losers!`)
+   }
+
    const checkForWinner = () => {
       let roundWon = false
 
@@ -51,16 +61,14 @@ function Game() {
       }
 
       if(roundWon) {
-         window.alert(`Congrats Player ${currentPlayer}! You are the winner!!`)
+         setTimeout(() => handleWin(), 500)
          return;
       }
 
-      if (!gameState.includes[""]) {
-         window.alert(`The game ended in a draw. You're both losers!`)
+      if (!gameState.includes("")) {
+         setTimeout(() => handleDraw(), 500)
          return;
       }
-
-      setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
    }
 
    const handleCellClick = (event: any) => {
