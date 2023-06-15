@@ -18,17 +18,20 @@ const WINNING_COMBOS = [
    [2, 4, 6],
 ]
 
+const INITIAL_SCORES = {X:0, O:0}
+const INITIAL_PLAYER = "X"
+
 function Game() {
    const [gameState, setGameState] = useState<string[]>(INITIAL_GAME_STATE)
-   const [currentPlayer, setCurrentPlayer] = useState<string>("X")
-   const [playerScores, setplayerScore] = useState<Number[]>([0,0])
+   const [currentPlayer, setCurrentPlayer] = useState<string>(INITIAL_PLAYER)
+   const [scores, setScores] = useState(INITIAL_SCORES)
 
    useEffect(() => {
-      changePlayer();
+      checkForWinner();
    }, [gameState])
 
    const changePlayer = () => {
-      checkForWinner()
+      setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
    }
 
    const handleWin = () => {
@@ -69,6 +72,8 @@ function Game() {
          setTimeout(() => handleDraw(), 500)
          return;
       }
+
+      changePlayer();
    }
 
    const handleCellClick = (event: any) => {
